@@ -21,10 +21,10 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
-                if($request->ajax()){
-                    throw new \Exception('Already login',422);
-                }
-                return redirect(RouteServiceProvider::HOME);
+                    
+               return response()->json([
+                'message' => 'Already authenticated'
+               ],422); 
             }
         }
 
