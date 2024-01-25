@@ -20,6 +20,10 @@ class Chat extends Model
         'seen',
     ];
 
+    protected $casts = [
+        'seen' => 'boolean',
+    ];
+
 
     public function chatable(): MorphTo
     {
