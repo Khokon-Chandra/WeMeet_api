@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 
 class User extends Authenticatable
 {
@@ -44,4 +45,11 @@ class User extends Authenticatable
     ];
 
     protected $guard = 'user';
+
+
+    public function chat(): MorphOne
+    {
+        return $this->morphOne(Chat::class, 'chatable');
+    }
+
 }
