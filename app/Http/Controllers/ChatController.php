@@ -9,10 +9,11 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Events\SendMessage;
 
 class ChatController extends Controller
 {
-    public function index(Request $request, User $user)
+    public function index(Request $request, User $user): AnonymousResourceCollection
     {
         $conversations = Chat::where(function($query) use($user){
             $query->where('user_id',Auth::id())
@@ -27,7 +28,7 @@ class ChatController extends Controller
         ->when($request->offset ?? false, function ($query, $offset) {
             $query->offset($offset);
         })
-        
+
         ->limit(20)
 
         ->latest()
@@ -53,6 +54,8 @@ class ChatController extends Controller
             ]);
 
             $user->chats()->save($chat);
+
+            SendMessage::dispatch($chat);
 
             DB::commit();
 
