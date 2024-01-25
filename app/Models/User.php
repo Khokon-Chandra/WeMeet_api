@@ -47,7 +47,7 @@ class User extends Authenticatable
     protected $guard = 'user';
 
 
-    public function chat(): MorphOne
+    public function chats(): MorphOne
     {
         return $this->morphOne(Chat::class, 'chatable');
     }
