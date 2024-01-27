@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ChatController;
+use App\Models\Chat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,3 +19,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/users', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/chat/{user}',[ChatController::class,'index'])->name('chat.index');
+Route::post('send_message/{user}',[ChatController::class,'store'])->name('chat.store');
