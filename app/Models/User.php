@@ -3,11 +3,12 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
-use Illuminate\Database\Eloquent\Relations\MorphOne;
 
 class User extends Authenticatable
 {
@@ -47,9 +48,13 @@ class User extends Authenticatable
     protected $guard = 'user';
 
 
-    public function chats(): MorphOne
+    public function chats(): MorphMany
     {
-        return $this->morphOne(Chat::class, 'chatable');
+        return $this->morphMany(Chat::class, 'chatable');
+    }
+    public function chat(): MorphOne
+    {
+        return $this->MorphOne(Chat::class, 'chatable');
     }
 
 }

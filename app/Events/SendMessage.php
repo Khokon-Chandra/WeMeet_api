@@ -34,7 +34,7 @@ class SendMessage implements ShouldBroadcast
     public function broadcastOn(): array
     {
         return [
-            new PrivateChannel("message-{$this->data->chatable_id}"),
+            new Channel("message-{$this->data->chatable_id}"),
         ];
     }
 
@@ -53,6 +53,7 @@ class SendMessage implements ShouldBroadcast
             'message'     => $this->data->message,
             'seen'        => $this->data->seen,
             'date'        => $this->data->created_at->diffForHumans(),    
+            'avatar'      => "https://static.thenounproject.com/png/363640-200.png",
             
         ];
     }
