@@ -3,6 +3,7 @@
 namespace App\Http\Resources\V1;
 
 use Carbon\Carbon;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -19,7 +20,7 @@ class ContactResource extends JsonResource
             'id'                => $this->id,
             'name'              => $this->name,
             'active'            => true,
-            'last_message'      => $this->chat?->message,
+            'last_message'      => Str::limit($this->chat?->message, 25),
             'last_message_at'   => Carbon::parse($this->created_at)->format('h:i'),
             'count_unseen'      => $this->chats_count,
             'avatar'            => "https://static.thenounproject.com/png/363640-200.png",
