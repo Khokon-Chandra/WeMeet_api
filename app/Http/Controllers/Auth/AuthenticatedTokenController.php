@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Http\Resources\V1\UserResource;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -22,7 +23,7 @@ class AuthenticatedTokenController extends Controller
         return response()->json([
             'message' => 'user authentication successfull',
             'token'   => $token->plainTextToken,
-            'user'    => $user,
+            'user'    => new UserResource($user),
         ],200);
     }
 

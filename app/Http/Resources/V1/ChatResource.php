@@ -20,7 +20,8 @@ class ChatResource extends JsonResource
             'chatable_id' => $this->chatable_id,
             'message'     => $this->message,
             'seen'        => $this->seen,
-            'date'        => $this->created_at->diffForHumans(),    
+            'date'        => $this->created_at->diffForHumans(),   
+            'avatar'      => "https://static.thenounproject.com/png/363640-200.png", 
             
         ];
     }

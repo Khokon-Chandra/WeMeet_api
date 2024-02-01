@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ChatController;
+use App\Http\Controllers\UserController;
 use App\Models\Chat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -16,9 +17,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/users', function (Request $request) {
-    return $request->user();
-});
+Route::get('/user', [UserController::class, 'AuthUser'])->name('user.AuthUser');
 
-Route::get('/chat/{user}',[ChatController::class,'index'])->name('chat.index');
+// Chat Page
+Route::get('/contacts',[ChatController::class,'contacts'])->name('chat.contacts');
+Route::get('/messages/{user}',[ChatController::class,'index'])->name('chat.index');
 Route::post('send_message/{user}',[ChatController::class,'store'])->name('chat.store');
